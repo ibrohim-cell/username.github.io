@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Advanced Fractal Art Generator</title>
+    <title>Fractal Generator</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -12,69 +12,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* Animated Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
-            z-index: -1;
-        }
-
-        .background-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-        }
-
-        .background-animation div {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 15s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) translateX(0);
-            }
-            25% {
-                transform: translateY(-100px) translateX(50px);
-            }
-            50% {
-                transform: translateY(-50px) translateX(-50px);
-            }
-            75% {
-                transform: translateY(100px) translateX(25px);
-            }
         }
 
         .container {
             max-width: 1200px;
             width: 100%;
-            background: rgba(45, 45, 45, 0.95);
+            background: #2d2d2d;
             padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: containerFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
         }
 
         .controls {
@@ -84,130 +30,69 @@
             margin-bottom: 20px;
         }
 
-        select, input {
-            background: rgba(61, 61, 61, 0.8);
+        select, input, button {
+            background: #3d3d3d;
             color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 12px;
-            border-radius: 8px;
+            border: 1px solid #555;
+            padding: 8px 12px;
+            border-radius: 5px;
             width: 100%;
             margin: 5px 0;
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-        }
-
-        select:hover, input:hover {
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
         }
 
         button {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
-            color: white;
+            background: #4CAF50;
             border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
-            width: 100%;
-            margin: 5px 0;
+            transition: background 0.3s;
         }
 
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+            background: #45a049;
         }
 
         #saveBtn {
-            background: linear-gradient(45deg, #2196F3, #1976D2);
+            background: #2196F3;
         }
 
         #saveBtn:hover {
-            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+            background: #1976D2;
         }
 
         canvas {
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            border: 2px solid #555;
+            border-radius: 5px;
             max-width: 100%;
             height: auto;
             background: #000;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
-            transition: all 0.3s;
-        }
-
-        canvas:hover {
-            transform: scale(1.01);
         }
 
         .label {
             font-size: 14px;
             margin-bottom: 5px;
             color: #ddd;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .progress {
             width: 100%;
             height: 20px;
-            background: rgba(61, 61, 61, 0.5);
+            background: #3d3d3d;
             border-radius: 10px;
             overflow: hidden;
-            margin: 20px 0;
+            margin-top: 10px;
         }
 
         .progress-bar {
             width: 0%;
             height: 100%;
-            background: linear-gradient(45deg, #4CAF50, #45a049);
+            background: #4CAF50;
             transition: width 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent,
-                rgba(255, 255, 255, 0.2),
-                transparent
-            );
-            animation: progressShine 1.5s linear infinite;
-        }
-
-        @keyframes progressShine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(50%); }
-        }
-
-        h1 {
-            text-align: center;
-            color: #fff;
-            margin-bottom: 30px;
-            font-size: 2.5em;
-            text-shadow: 0 0 10px rgba(255,255,255,0.1);
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="background-animation">
-        <div style="background: #4CAF50; width: 100px; height: 100px; left: 10%; top: 20%;"></div>
-        <div style="background: #2196F3; width: 150px; height: 150px; right: 20%; top: 10%;"></div>
-        <div style="background: #9C27B0; width: 80px; height: 80px; left: 50%; bottom: 30%;"></div>
-    </div>
-
     <div class="container">
-        <h1>Fractal Art Generator</h1>
+        <h1>Fractal Generator</h1>
         <div class="controls">
             <div>
                 <div class="label">Fractal Type:</div>
@@ -278,7 +163,6 @@
             electric: (t) => `rgb(${Math.floor(200 * t)}, ${Math.floor(200 + 55 * Math.sin(t * Math.PI))}, ${Math.floor(255 * Math.cos(t * Math.PI))})`
         };
 
-        // Mandelbrot Set
         function mandelbrot(x0, y0, maxIter) {
             let x = 0, y = 0;
             let iter = 0;
@@ -291,7 +175,6 @@
             return iter;
         }
 
-        // Julia Set
         function julia(x0, y0, maxIter) {
             let x = x0, y = y0;
             const cx = -0.4, cy = 0.6;
@@ -305,7 +188,6 @@
             return iter;
         }
 
-        // Burning Ship
         function burningShip(x0, y0, maxIter) {
             let x = 0, y = 0;
             let iter = 0;
@@ -318,7 +200,6 @@
             return iter;
         }
 
-        // Multibrot
         function multibrot(x0, y0, maxIter) {
             let x = 0, y = 0;
             let iter = 0;
@@ -334,56 +215,72 @@
             return iter;
         }
 
-        // Cubic Mandelbrot
-        function cubicMandelbrot(x0, y0, maxIter) {
-            let x = 0, y = 0;
-            let iter = 0;
-            while (x * x + y * y < 4 && iter < maxIter) {
-                const x2 = x * x - y * y;
-                const y2 = 2 * x * y;
-                const x3 = x2 * x - 3 * x * y * y;
-                const y3 = 3 * x2 * y - y2 * y;
-                x = x3 + x0;
-                y = y3 + y0;
-                iter++;
-            }
-            return iter;
-        }
+        function drawFractal() {
+            const maxIter = parseInt(document.getElementById('maxIterations').value);
+            const fractalType = document.getElementById('fractalType').value;
+            const colorScheme = document.getElementById('colorScheme').value;
+            const zoom = parseFloat(document.getElementById('zoom').value);
 
-        // Cubic Julia
-        function cubicJulia(x0, y0, maxIter) {
-            let x = x0, y = y0;
-            const cx = -0.1, cy = 0.65;
-            let iter = 0;
-            while (x * x + y * y < 4 && iter < maxIter) {
-                const x2 = x * x - y * y;
-                const y2 = 2 * x * y;
-                const x3 = x2 * x - 3 * x * y * y;
-                const y3 = 3 * x2 * y - y2 * y;
-                x = x3 + cx;
-                y = y3 + cy;
-                iter++;
-            }
-            return iter;
-        }
+            const imageData = ctx.createImageData(canvas.width, canvas.height);
+            const data = imageData.data;
 
-        // Sierpinski Triangle
-        function sierpinski(x0, y0, maxIter) {
-            const scale = 2;
-            const x = (x0 + 2) * scale;
-            const y = (y0 + 1.5) * scale;
-            
-            let iter = 0;
-            while (iter < maxIter) {
-                if ((Math.floor(x) & Math.floor(y)) !== 0) {
-                    return iter;
+            let fractalFunc;
+            switch(fractalType) {
+                case 'mandelbrot':
+                    fractalFunc = mandelbrot;
+                    break;
+                case 'julia':
+                    fractalFunc = julia;
+                    break;
+                case 'burningShip':
+                    fractalFunc = burningShip;
+                    break;
+                case 'multibrot':
+                    fractalFunc = multibrot;
+                    break;
+                default:
+                    fractalFunc = mandelbrot;
+            }
+
+            const colorFunc = colorSchemes[colorScheme];
+
+            for (let y = 0; y < canvas.height; y++) {
+                // Update progress bar
+                progressBar.style.width = `${(y / canvas.height) * 100}%`;
+
+                for (let x = 0; x < canvas.width; x++) {
+                    const x0 = (x - canvas.width/2) / (zoom * canvas.width/4);
+                    const y0 = (y - canvas.height/2) / (zoom * canvas.height/4);
+
+                    const iter = fractalFunc(x0, y0, maxIter);
+                    const t = iter === maxIter ? 0 : iter / maxIter;
+
+                    const color = colorFunc(t);
+                    const match = color.match(/\d+/g).map(Number);
+                    
+                    const pixelIndex = (y * canvas.width + x) * 4;
+                    data[pixelIndex] = match[0];     // R
+                    data[pixelIndex + 1] = match[1]; // G
+                    data[pixelIndex + 2] = match[2]; // B
+                    data[pixelIndex + 3] = 255;      // A
                 }
-                iter++;
             }
-            return maxIter;
+
+            ctx.putImageData(imageData, 0, 0);
+            progressBar.style.width = '100%';
         }
 
-        // Dragon Curve
-        function dragonCurve(x0, y0, maxIter) {
-            let x = x0, y = y0;
-            let iter = 0;
+        document.getElementById('generateBtn').addEventListener('click', drawFractal);
+
+        document.getElementById('saveBtn').addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = 'fractal.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+
+        // Initial draw
+        drawFractal();
+    </script>
+</body>
+</html>
