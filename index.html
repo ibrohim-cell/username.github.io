@@ -103,7 +103,10 @@
                     <option value="multibrot">Multibrot</option>
                     <option value="cubicMandelbrot">Cubic Mandelbrot</option>
                     <option value="cubicJulia">Cubic Julia</option>
-                   
+                    <option value="sierpinski">Sierpinski Triangle</option>
+                    <option value="dragonCurve">Dragon Curve</option>
+                    <option value="hilbert">Hilbert Curve</option>
+                    <option value="kochSnowflake">Koch Snowflake</option>
                 </select>
             </div>
             <div>
@@ -145,19 +148,19 @@
 
         // Color scheme palettes
         const colorSchemes = {
-            rainbow: (t) => hsl(${t * 360}, 100%, 50%),
-            blue: (t) => rgb(0, 0, ${Math.floor(t * 255)}),
+            rainbow: (t) => `hsl(${t * 360}, 100%, 50%)`,
+            blue: (t) => `rgb(0, 0, ${Math.floor(t * 255)})`,
             greyscale: (t) => {
                 const v = Math.floor(t * 255);
-                return rgb(${v}, ${v}, ${v});
+                return `rgb(${v}, ${v}, ${v})`;
             },
-            sunset: (t) => rgb(${Math.floor(255 * t)}, ${Math.floor(100 * t)}, ${Math.floor(50 + 100 * t)}),
-            ocean: (t) => rgb(${Math.floor(50 * t)}, ${Math.floor(100 + 155 * t)}, ${Math.floor(150 + 105 * t)}),
-            forest: (t) => rgb(${Math.floor(50 * t)}, ${Math.floor(100 + 155 * t)}, ${Math.floor(50 * t)}),
-            fire: (t) => rgb(${Math.floor(200 + 55 * t)}, ${Math.floor(100 * t)}, 0),
-            earth: (t) => rgb(${Math.floor(139 * t)}, ${Math.floor(69 * t)}, ${Math.floor(19 * t)}),
-            pastel: (t) => hsl(${t * 360}, 70%, 80%),
-            electric: (t) => rgb(${Math.floor(200 * t)}, ${Math.floor(200 + 55 * Math.sin(t * Math.PI))}, ${Math.floor(255 * Math.cos(t * Math.PI))})
+            sunset: (t) => `rgb(${Math.floor(255 * t)}, ${Math.floor(100 * t)}, ${Math.floor(50 + 100 * t)})`,
+            ocean: (t) => `rgb(${Math.floor(50 * t)}, ${Math.floor(100 + 155 * t)}, ${Math.floor(150 + 105 * t)})`,
+            forest: (t) => `rgb(${Math.floor(50 * t)}, ${Math.floor(100 + 155 * t)}, ${Math.floor(50 * t)})`,
+            fire: (t) => `rgb(${Math.floor(200 + 55 * t)}, ${Math.floor(100 * t)}, 0)`,
+            earth: (t) => `rgb(${Math.floor(139 * t)}, ${Math.floor(69 * t)}, ${Math.floor(19 * t)})`,
+            pastel: (t) => `hsl(${t * 360}, 70%, 80%)`,
+            electric: (t) => `rgb(${Math.floor(200 * t)}, ${Math.floor(200 + 55 * Math.sin(t * Math.PI))}, ${Math.floor(255 * Math.cos(t * Math.PI))})`
         };
 
         function mandelbrot(x0, y0, maxIter) {
@@ -243,7 +246,7 @@
 
             for (let y = 0; y < canvas.height; y++) {
                 // Update progress bar
-                progressBar.style.width = ${(y / canvas.height) * 100}%;
+                progressBar.style.width = `${(y / canvas.height) * 100}%`;
 
                 for (let x = 0; x < canvas.width; x++) {
                     const x0 = (x - canvas.width/2) / (zoom * canvas.width/4);
