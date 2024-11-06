@@ -3,6 +3,7 @@
 <head>
     <title>Fractal Generator</title>
     <style>
+        /* Existing styles */
         body {
             font-family: 'Arial', sans-serif;
             background: #1a1a1a;
@@ -12,8 +13,80 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
         }
 
+        /* Loading screen styles */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s;
+        }
+
+        .fractal-loader {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            animation: rotate 4s linear infinite;
+        }
+
+        .fractal-loader::before,
+        .fractal-loader::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: #4CAF50;
+        }
+
+        .fractal-loader::before {
+            animation: spin 3s linear infinite;
+        }
+
+        .fractal-loader::after {
+            border-top-color: #2196F3;
+            animation: spin 1.5s linear reverse infinite;
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            font-size: 24px;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #4CAF50, #2196F3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg) scale(1); }
+            100% { transform: rotate(360deg) scale(0.8); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Existing container styles with fade-in animation */
         .container {
             max-width: 1200px;
             width: 100%;
@@ -21,8 +94,17 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
         }
 
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Rest of your existing styles */
         .controls {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -91,7 +173,14 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="fractal-loader"></div>
+        <div class="loading-text">LOADING FRACTAL GENERATOR...</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container" id="mainContent">
         <h1>Fractal Generator</h1>
         <div class="controls">
             <div>
@@ -142,6 +231,20 @@
     </div>
 
     <script>
+        // Loading screen logic
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                const mainContent = document.getElementById('mainContent');
+                
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    mainContent.classList.add('visible');
+                }, 500);
+            }, 2000); // Show loading screen for 2 seconds
+        });
+
         const canvas = document.getElementById('fractalCanvas');
         const ctx = canvas.getContext('2d');
         const progressBar = document.getElementById('progressBar');
@@ -279,8 +382,8 @@
             link.click();
         });
 
-        // Initial draw
-        drawFractal();
+        // Initial draw after loading screen
+        setTimeout(drawFractal, 2500);
     </script>
 </body>
 </html>
