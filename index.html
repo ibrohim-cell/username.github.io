@@ -1,226 +1,362 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Enhanced Fractal Batik Explorer</title>
+    <title>Generator Fraktal Interaktif</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #1a0f2e;
-            color: #fff;
+            margin: 0;
             min-height: 100vh;
-            padding: 2rem;
-            background: linear-gradient(135deg, #1a0f2e 0%, #2d1b4e 100%);
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #1a1a2e);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: rgba(45, 27, 78, 0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 2rem;
+            text-align: center;
+            padding: 20px;
+            max-width: 1000px;
         }
 
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            background: linear-gradient(45deg, #ffb347, #ffcc33);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0,255,136,0.5);
+            margin-bottom: 30px;
         }
 
         .controls {
-            background: rgba(45, 27, 78, 0.5);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
-        .control-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .label {
-            font-size: 0.9rem;
-            color: #ffb347;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        select, input {
-            width: 100%;
-            padding: 0.8rem;
-            background: rgba(26, 15, 46, 0.8);
-            border: 1px solid rgba(255, 179, 71, 0.3);
-            border-radius: 8px;
-            color: #fff;
-            margin-top: 0.5rem;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 1rem;
-            margin-top: 1rem;
+        select, button {
+            padding: 10px 20px;
             border: none;
-            border-radius: 8px;
-            background: linear-gradient(45deg, #ffb347, #ffcc33);
-            color: #1a0f2e;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .creativity-score {
-            margin-top: 2rem;
-            text-align: center;
-            padding: 1rem;
+            border-radius: 25px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .score-value {
-            font-size: 2.5rem;
-            color: #ffb347;
-            font-weight: 700;
+        select:hover, button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        #downloadBtn {
+            background: linear-gradient(45deg, #00ff88, #00b3ff);
+            color: #1a1a2e;
+            font-weight: bold;
+            border: none;
+        }
+
+        #downloadBtn:hover {
+            background: linear-gradient(45deg, #00b3ff, #00ff88);
+            transform: translateY(-2px) scale(1.05);
         }
 
         canvas {
-            width: 100%;
-            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            background: black;
+            margin-top: 20px;
+        }
+
+        option {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .download-options {
+            position: absolute;
+            background: rgba(26, 26, 46, 0.95);
             border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 100;
         }
 
-        .parameters {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-
-        .info-panel {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+        .download-options button {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            text-align: left;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Fractal Batik Explorer</h1>
-        <div class="grid">
-            <div class="controls">
-                <div class="control-group">
-                    <div class="label">Fractal Type</div>
-                    <select id="fractalType">
-                        <option value="mandelbrot">Mandelbrot Set</option>
-                        <option value="julia">Julia Set</option>
-                        <option value="burningShip">Burning Ship</option>
-                        <option value="multibrot">Multibrot</option>
-                        <option value="cubicMandelbrot">Cubic Mandelbrot</option>
-                        <option value="cubicJulia">Cubic Julia</option>
-                        <option value="sierpinski">Sierpinski Triangle</option>
-                        <option value="dragonCurve">Dragon Curve</option>
-                        <option value="hilbertCurve">Hilbert Curve</option>
-                        <option value="kochSnowflake">Koch Snowflake</option>
-                    </select>
-                </div>
-
-                <div class="control-group">
-                    <div class="label">Color Scheme</div>
-                    <select id="colorScheme">
-                        <option value="rainbow">Rainbow</option>
-                        <option value="blue">Blue</option>
-                        <option value="greyscale">Greyscale</option>
-                        <option value="sunset">Sunset</option>
-                        <option value="ocean">Ocean</option>
-                        <option value="forest">Forest</option>
-                        <option value="fire">Fire</option>
-                        <option value="earth">Earth</option>
-                        <option value="pastel">Pastel</option>
-                        <option value="electric">Electric</option>
-                    </select>
-                </div>
-
-                <div class="control-group">
-                    <div class="label">Maximum Iterations</div>
-                    <input type="range" id="maxIterations" min="50" max="1000" value="200">
-                    <div class="parameters" id="iterationsValue">200</div>
-                </div>
-
-                <div class="control-group">
-                    <div class="label">Zoom Level</div>
-                    <input type="range" id="zoom" min="0.5" max="5" step="0.1" value="1">
-                    <div class="parameters" id="zoomValue">1.0x</div>
-                </div>
-
-                <div class="control-group">
-                    <div class="label">Rotation (degrees)</div>
-                    <input type="range" id="rotation" min="0" max="360" value="0">
-                    <div class="parameters" id="rotationValue">0°</div>
-                </div>
-
-                <button id="generate" class="btn">Generate Pattern</button>
-                <button id="random" class="btn">Random Pattern</button>
-                <button id="save" class="btn">Save Pattern</button>
-
-                <div class="creativity-score">
-                    <div class="label">Creativity Score</div>
-                    <div class="score-value" id="score">0</div>
-                </div>
-
-                <div class="info-panel">
-                    <div class="label">Pattern Info</div>
-                    <div id="patternInfo"></div>
-                </div>
+        <h1>Generator Fraktal Interaktif</h1>
+        <div class="controls">
+            <select id="fractalType">
+                <option value="mandelbrot">Mandelbrot Set</option>
+                <option value="julia">Julia Set</option>
+                <option value="burningShip">Burning Ship</option>
+                <option value="sierpinski">Sierpinski Triangle</option>
+                <option value="dragonCurve">Dragon Curve</option>
+            </select>
+            <select id="colorScheme">
+                <option value="rainbow">Rainbow</option>
+                <option value="blue">Blue</option>
+                <option value="greyscale">Greyscale</option>
+                <option value="sunset">Sunset</option>
+                <option value="ocean">Ocean</option>
+                <option value="forest">Forest</option>
+                <option value="fire">Fire</option>
+                <option value="earth">Earth</option>
+                <option value="pastel">Pastel</option>
+                <option value="electric">Electric</option>
+            </select>
+            <button onclick="generateFractal()">Generate Fractal</button>
+        </div>
+        <canvas id="fractalCanvas" width="800" height="600"></canvas>
+        <div class="button-container">
+            <button id="downloadBtn" onclick="downloadImage()">💾 Save Image</button>
+            <div id="downloadOptions" class="download-options">
+                <button onclick="downloadImage('png')">Download as PNG</button>
+                <button onclick="downloadImage('jpg')">Download as JPG</button>
             </div>
-
-            <canvas id="canvas"></canvas>
         </div>
     </div>
 
     <script>
-        const canvas = document.getElementById('canvas');
+        const canvas = document.getElementById('fractalCanvas');
         const ctx = canvas.getContext('2d');
-        let score = 0;
+        const width = canvas.width;
+        const height = canvas.height;
 
-        canvas.width = 800;
-        canvas.height = 800;
+        function getColor(iteration, maxIterations, scheme) {
+            const normalized = iteration / maxIterations;
+            switch(scheme) {
+                case 'rainbow':
+                    return `hsl(${normalized * 360}, 100%, 50%)`;
+                case 'blue':
+                    return `rgb(0, 0, ${Math.floor(normalized * 255)})`;
+                case 'greyscale':
+                    const value = Math.floor(normalized * 255);
+                    return `rgb(${value}, ${value}, ${value})`;
+                case 'sunset':
+                    return `rgb(${Math.floor(normalized * 255)}, 
+                            ${Math.floor(normalized * 100)}, 
+                            ${Math.floor(normalized * 50)})`;
+                case 'ocean':
+                    return `rgb(${Math.floor(normalized * 50)}, 
+                            ${Math.floor(normalized * 100)}, 
+                            ${Math.floor(normalized * 255)})`;
+                case 'forest':
+                    return `rgb(${Math.floor(normalized * 50)}, 
+                            ${Math.floor(normalized * 255)}, 
+                            ${Math.floor(normalized * 50)})`;
+                case 'fire':
+                    return `rgb(${Math.floor(normalized * 255)}, 
+                            ${Math.floor(normalized * 165 * normalized)}, 0)`;
+                case 'earth':
+                    return `rgb(${Math.floor(normalized * 139)}, 
+                            ${Math.floor(normalized * 69)}, 
+                            ${Math.floor(normalized * 19)})`;
+                case 'pastel':
+                    return `hsl(${normalized * 360}, 70%, 80%)`;
+                case 'electric':
+                    return `rgb(${Math.floor(normalized * 255)}, 
+                            ${Math.floor(normalized * 255 * Math.sin(normalized * Math.PI))}, 
+                            ${Math.floor(normalized * 255 * Math.cos(normalized * Math.PI))})`;
+                default:
+                    return `hsl(${normalized * 360}, 100%, 50%)`;
+            }
+        }
 
-        const colorSchemes = { /* color functions go here */ };
-        const fractals = { /* fractal functions go here */ };
+        function mandelbrot(x0, y0, maxIterations) {
+            let x = 0, y = 0;
+            let iteration = 0;
+            
+            while (x*x + y*y < 4 && iteration < maxIterations) {
+                const xtemp = x*x - y*y + x0;
+                y = 2*x*y + y0;
+                x = xtemp;
+                iteration++;
+            }
+            
+            return iteration;
+        }
 
-        function calculateCreativityScore() { /* creativity score logic */ }
-        function generatePattern() { /* fractal pattern generation logic */ }
+        function julia(x0, y0, maxIterations) {
+            let x = x0, y = y0;
+            const cx = -0.4, cy = 0.6;
+            let iteration = 0;
+            
+            while (x*x + y*y < 4 && iteration < maxIterations) {
+                const xtemp = x*x - y*y + cx;
+                y = 2*x*y + cy;
+                x = xtemp;
+                iteration++;
+            }
+            
+            return iteration;
+        }
 
-        document.getElementById('generate').addEventListener('click', generatePattern);
-        document.getElementById('maxIterations').addEventListener('input', (e) => {
-            document.getElementById('iterationsValue').textContent = e.target.value;
-        });
-        document.getElementById('zoom').addEventListener('input', (e) => {
-            document.getElementById('zoomValue').textContent = `${e.target.value}x`;
-        });
-        document.getElementById('rotation').addEventListener('input', (e) => {
-            document.getElementById('rotationValue').textContent = `${e.target.value}°`;
-        });
+        function burningShip(x0, y0, maxIterations) {
+            let x = 0, y = 0;
+            let iteration = 0;
+            
+            while (x*x + y*y < 4 && iteration < maxIterations) {
+                const xtemp = x*x - y*y + x0;
+                y = Math.abs(2*x*y) + y0;
+                x = xtemp;
+                iteration++;
+            }
+            
+            return iteration;
+        }
+
+        function sierpinski(x, y) {
+            const size = Math.min(width, height);
+            const scale = size / 512;
+            x = Math.floor(x / scale);
+            y = Math.floor(y / scale);
+            return (x & y) === 0 ? 1 : 0;
+        }
+
+        function dragonCurve(x, y) {
+            const iterations = 12;
+            let px = x - width/2;
+            let py = y - height/2;
+            const scale = 150;
+            px /= scale;
+            py /= scale;
+            
+            let sum = 0;
+            for(let i = 0; i < iterations; i++) {
+                const temp = px;
+                px = Math.cos(Math.PI/4) * px - Math.sin(Math.PI/4) * py;
+                py = Math.sin(Math.PI/4) * temp + Math.cos(Math.PI/4) * py;
+                sum += Math.floor(Math.abs(px + py));
+            }
+            return sum % 2 === 0 ? 1 : 0;
+        }
+
+        function generateFractal() {
+            const fractalType = document.getElementById('fractalType').value;
+            const colorScheme = document.getElementById('colorScheme').value;
+            const imageData = ctx.createImageData(width, height);
+            const maxIterations = 100;
+
+            for(let y = 0; y < height; y++) {
+                for(let x = 0; x < width; x++) {
+                    let value;
+                    switch(fractalType) {
+                        case 'mandelbrot':
+                            const x0 = (x - width/2) * 4/width;
+                            const y0 = (y - height/2) * 4/height;
+                            value = mandelbrot(x0, y0, maxIterations);
+                            break;
+                        case 'julia':
+                            const jx = (x - width/2) * 4/width;
+                            const jy = (y - height/2) * 4/height;
+                            value = julia(jx, jy, maxIterations);
+                            break;
+                        case 'burningShip':
+                            const bx = (x - width/2) * 4/width;
+                            const by = (y - height/2) * 4/height;
+                            value = burningShip(bx, by, maxIterations);
+                            break;
+                        case 'sierpinski':
+                            value = sierpinski(x, y) * maxIterations;
+                            break;
+                        case 'dragonCurve':
+                            value = dragonCurve(x, y) * maxIterations;
+                            break;
+                    }
+
+                    const color = getColor(value, maxIterations, colorScheme);
+                    const rgb = color.match(/\d+/g).map(Number);
+                    const idx = (y * width + x) * 4;
+                    
+                    imageData.data[idx] = rgb[0];
+                    imageData.data[idx + 1] = rgb[1];
+                    imageData.data[idx + 2] = rgb[2];
+                    imageData.data[idx + 3] = 255;
+                }
+            }
+            
+            ctx.putImageData(imageData, 0, 0);
+        }
+
+        function downloadImage(format = 'png') {
+            // Create a temporary link element
+            const link = document.createElement('a');
+            
+            // Get the current fractal type and color scheme for the filename
+            const fractalType = document.getElementById('fractalType').value;
+            const colorScheme = document.getElementById('colorScheme').value;
+            
+            // Generate filename with current settings and timestamp
+            const timestamp = new Date().toISOString().slice(0,19).replace(/[-:]/g,'').replace('T','-');
+            const filename = `fractal-${fractalType}-${colorScheme}-${timestamp}.${format}`;
+            
+            // Convert canvas to data URL based on format
+            const mimeType = format === 'png' ? 'image/png' : 'image/jpeg';
+            const quality = format === 'png' ? 1.0 : 0.92;
+            const dataUrl = canvas.toDataURL(mimeType, quality);
+            
+            // Set up download
+            link.download = filename;
+            link.href = dataUrl;
+            
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show success message
+            const successMsg = document.createElement('div');
+            successMsg.textContent = `Image saved as ${filename}`;
+            successMsg.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 255, 136, 0.9);
+                color: #1a1a2e;
+                padding: 10px 20px;
+                border-radius: 25px;
+                font-weight: bold;
+                animation: fadeOut 3s forwards;
+            `;
+            
+            document.body.appendChild(successMsg);
+            setTimeout(() => document.body.removeChild(successMsg), 3000);
+        }
+
+        // Add success message animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                0% { opacity: 1; }
+                70% { opacity: 1; }
+                100% { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Generate initial fractal
+        generateFractal();
     </script>
 </body>
 </html>
