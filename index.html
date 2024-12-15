@@ -1,220 +1,203 @@
-import React, { useState } from 'react';
-
-// Custom SVG Icons (same as previous implementation)
-const HomeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-    <polyline points="9 22 9 12 15 12 15 22"/>
-  </svg>
-);
-
-const UserIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-    <circle cx="12" cy="7" r="4"/>
-  </svg>
-);
-
-const BriefcaseIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-  </svg>
-);
-
-const MailIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="4" width="20" height="16" rx="2"/>
-    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-  </svg>
-);
-
-const InstagramIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-  </svg>
-);
-
-const YouTubeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 8v8l5-4z"/>
-    <rect x="2" y="6" width="20" height="12" rx="2" ry="2"/>
-  </svg>
-);
-
-const MuhammadIbrohimPortfolio = () => {
-  const [activeSection, setActiveSection] = useState('home');
-
-  const sections = {
-    home: (
-      <div className="flex flex-col items-center justify-center space-y-6 text-center">
-        <img 
-          src="/api/placeholder/300/300" 
-          alt="MUHAMMAD IBROHIM NASUTION" 
-          className="rounded-full w-64 h-64 object-cover border-4 border-blue-500 shadow-lg"
-        />
-        <h1 className="text-4xl font-bold text-gray-800">Muhammad Ibrohim Nasution</h1>
-        <p className="text-xl text-gray-600">Mahasiswa Matematika & Desainer</p>
-        <div className="flex space-x-4">
-          <a href="https://instagram.com" className="text-blue-500 hover:text-blue-700"><InstagramIcon /></a>
-          <a href="https://youtube.com" className="text-blue-500 hover:text-blue-700"><YouTubeIcon /></a>
-        </div>
-        <p className="text-gray-600 max-w-xl text-center">
-          Saya adalah mahasiswa yang mempunyai keahlian dalam memfoto, mengedit, dan mempublish menggunakan kamera hp, Canva, CapCut, dan Alight Motion. Selain itu, saya juga ahli dalam penelitian, seperti membuat jurnal tentang batik fractal.
-        </p>
-      </div>
-    ),
-    about: (
-      <div className="space-y-4">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">Tentang Saya</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <h3 className="text-xl font-semibold mb-2">Profil</h3>
-            <p className="text-gray-600">
-              Saya adalah mahasiswa Universitas Negeri Medan di Fakultas MIPA, jurusan Matematika. 
-              Berasal dari keluarga sederhana dengan ibu seorang petani, saya memiliki 6 saudara tiri 
-              dan 1 saudara kandung.
-            </p>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-2">Keahlian</h3>
-            <ul className="list-disc list-inside text-gray-600">
-              <li>Desain</li>
-              <li>Fotografi</li>
-              <li>Video Editing</li>
-              <li>Penelitian Matematika</li>
-              <li>Pertanian</li>
+/index.html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Ibrohim Nasution - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#profile">Profil</a></li>
+                <li><a href="#education">Pendidikan</a></li>
+                <li><a href="#projects">Proyek</a></li>
+                <li><a href="#organization">Organisasi</a></li>
             </ul>
-          </div>
-        </div>
-        <div className="mt-6">
-          <h3 className="text-2xl font-semibold mb-4">Visi dan Misi</h3>
-          <p className="text-gray-600 mb-4">
-            <strong>Visi:</strong> Menghasilkan inovasi akademis dan solusi praktis yang memberdayakan 
-            masyarakat melalui pendidikan dan kewirausahaan berkelanjutan.
-          </p>
-          <ul className="list-disc list-inside text-gray-600 space-y-2">
-            {[
-              "Mengintegrasikan pengajaran akademis dengan praktik kewirausahaan yang inovatif",
-              "Mendorong pengembangan kemampuan berpikir kritis dan jiwa wirausaha",
-              "Menciptakan penelitian terapan yang memiliki nilai ekonomi dan sosial",
-              "Membangun ekosistem pembelajaran yang mendukung pengembangan startup dan inovasi"
-            ].map((misi, index) => (
-              <li key={index}>{misi}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    ),
-    projects: (
-      <div className="space-y-6">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">Proyek</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          {[
-            {
-              title: "Satria Tani",
-              description: "Alat untuk mempermudah petani menanam kacang-kacangan seperti kacang hijau dan kacang tanah",
-              technologies: ["Desain Sederhana", "Terjangkau"],
-              image: "/api/placeholder/400/300"
-            },
-            {
-              title: "Batik Fractal Web",
-              description: "Aplikasi web design untuk membuat batik fraktal dengan pengaturan warna custom",
-              technologies: ["Web Design", "Coding", "VCS"],
-              image: "/api/placeholder/400/300"
-            }
-          ].map((project, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-gray-600 mb-2">{project.description}</p>
-                <div className="flex space-x-2">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span 
-                      key={techIndex} 
-                      className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+        </nav>
+    </header>
+
+    <main>
+        <section id="profile">
+            <h1>Muhammad Ibrohim Nasution</h1>
+            <img src="profile.jpg" alt="Foto Profesional" class="profile-pic">
+            <div class="contact-info">
+                <p>Email: 4231230002@mhs.unimed.ac.id</p>
+                <p>WhatsApp: 085762824951</p>
+                <p>Instagram: @ibrohimnasution</p>
+                <p>YouTube: Muhammad Ibrohim</p>
+            </div>
+            <h2>Tagline</h2>
+            <p>Saya adalah seorang mahasiswa yang mempunyai keahlian dalam memfoto, mengedit, dan mempublish dengan alat seperti kamera hp, Canva, CapCut, dan Alight Motion. Saya juga ahli dalam penelitian, contohnya membuat jurnal tentang batik fractal.</p>
+        </section>
+
+        <section id="about">
+            <h2>Ringkasan Profil</h2>
+            <p>Saya adalah mahasiswa Universitas Negeri Medan di Fakultas MIPA, Jurusan Matematika. Berasal dari keluarga sederhana dengan ibu seorang petani, saya memiliki 6 saudara tiri dan 1 saudara kandung.</p>
+            
+            <h3>Visi</h3>
+            <p>"Menghasilkan inovasi akademis dan solusi praktis yang memberdayakan masyarakat melalui pendidikan dan kewirausahaan berkelanjutan"</p>
+            
+            <h3>Misi</h3>
+            <ul>
+                <li>Mengintegrasikan pengajaran akademis dengan praktik kewirausahaan yang inovatif</li>
+                <li>Mendorong mahasiswa untuk mengembangkan kemampuan berpikir kritis dan jiwa wirausaha</li>
+                <li>Menciptakan penelitian terapan yang memiliki nilai ekonomi dan sosial</li>
+                <li>Membangun ekosistem pembelajaran yang mendukung pengembangan startup dan inovasi</li>
+                <li>Menghubungkan dunia akademis dengan industri melalui kolaborasi dan transfer pengetahuan</li>
+                <li>Mengembangkan model bisnis sosial yang memberikan solusi nyata bagi permasalahan masyarakat</li>
+                <li>Membina jejaring profesional yang dapat menciptakan peluang pengembangan karir mahasiswa</li>
+            </ul>
+        </section>
+
+        <section id="education">
+            <h2>Pendidikan</h2>
+            <div class="education-list">
+                <div class="education-item">
+                    <h3>Universitas Negeri Medan</h3>
+                    <p>FMIPA - Matematika (S1)</p>
+                    <p>2023 - Sekarang</p>
+                    <p>IPK: 2.20</p>
                 </div>
-              </div>
+                <div class="education-item">
+                    <h3>SMA Swasta Baitul Aziz</h3>
+                    <p>Jurusan IPA</p>
+                    <p>2020 - 2023</p>
+                </div>
+                <div class="education-item">
+                    <h3>Prestasi Akademik</h3>
+                    <ul>
+                        <li>Peraih Medali Perunggu OSN-HKu</li>
+                        <li>Juara 3 Matematika Kelas 8</li>
+                    </ul>
+                </div>
             </div>
-          ))}
-        </div>
-      </div>
-    ),
-    contact: (
-      <div className="space-y-6">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">Hubungi Saya</h2>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Kontak</h3>
-              <p className="text-gray-600">
-                <strong>Email:</strong> 4231230002@mhs.unimed.ac.id
-              </p>
-              <p className="text-gray-600">
-                <strong>WhatsApp:</strong> 085762824951
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Pendidikan</h3>
-              <ul className="list-disc list-inside text-gray-600">
-                <li>Universitas Negeri Medan - Matematika (2023)</li>
-                <li>SMA Swasta Baitul Aziz - IPA (2020-2023)</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Prestasi</h3>
-              <ul className="list-disc list-inside text-gray-600">
-                <li>Peraih Medali Perunggu OSN-HKu</li>
-                <li>Juara 3 Matematika Kelas 8</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  };
+        </section>
 
-  return (
-    <div className="min-h-screen bg-gray-50 flex">
-      {/* Sidebar Navigation */}
-      <div className="w-20 bg-white shadow-lg flex flex-col items-center py-8 space-y-6">
-        {[
-          { icon: HomeIcon, section: 'home' },
-          { icon: UserIcon, section: 'about' },
-          { icon: BriefcaseIcon, section: 'projects' },
-          { icon: MailIcon, section: 'contact' }
-        ].map(({ icon: Icon, section }) => (
-          <button
-            key={section}
-            onClick={() => setActiveSection(section)}
-            className={`p-3 rounded-full transition-all duration-300 ${
-              activeSection === section 
-                ? 'bg-blue-500 text-white' 
-                : 'text-gray-500 hover:bg-blue-100'
-            }`}
-          >
-            <Icon />
-          </button>
-        ))}
-      </div>
+        <section id="organization">
+            <h2>Organisasi dan Kepanitian</h2>
+            <div class="org-list">
+                <div class="org-item">
+                    <h3>HMI (Himpunan Mahasiswa Islam)</h3>
+                    <p>Divisi Pendidikan dan Sains</p>
+                    <p>Proker: Dialog Sains</p>
+                </div>
+                <div class="org-item">
+                    <h3>Maperca - Bidang PDD</h3>
+                    <ul>
+                        <li>Mendesain flyer, brosur, twibon</li>
+                        <li>Mendokumentasi saat acara</li>
+                        <li>Mempublis di media sosial Instagram komisariat HMI FMIPA Unimed</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-      {/* Main Content */}
-      <div className="flex-1 p-12 overflow-y-auto">
-        {sections[activeSection]}
-      </div>
-    </div>
-  );
-};
+        <section id="projects">
+            <h2>Portofolio Proyek</h2>
+            <div class="project-list">
+                <div class="project-item">
+                    <h3>Satria Tani</h3>
+                    <p>Alat untuk mempermudah petani dalam menanam biji kacangan seperti kacang hijau dan kacang tanah</p>
+                    <p>Teknologi: Bahan sederhana untuk terjangkau</p>
+                    <p>Peran: Pembuat Alat</p>
+                </div>
+                <div class="project-item">
+                    <h3>Web Batik Fractal</h3>
+                    <p>Aplikasi web design untuk membuat batik fraktal dengan pengaturan warna bebas</p>
+                    <p>Teknologi: Penggunaan VCS (Version Control System)</p>
+                    <p>Peran: Melengkapi kekurangan isi aplikasi</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-export default MuhammadIbrohimPortfolio;
+    <footer>
+        <p>&copy; 2024 Muhammad Ibrohim Nasution</p>
+        <p>Terakhir diperbarui: Desember 2024</p>
+    </footer>
+</body>
+</html>
+
+/styles.css
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ddd;
+}
+
+.profile-pic {
+    max-width: 200px;
+    border-radius: 50%;
+}
+
+section {
+    background-color: white;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.project-list, .org-list, .education-list {
+    display: grid;
+    gap: 15px;
+}
+
+.project-item, .org-item, .education-item {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+footer {
+    text-align: center;
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+}
+
+/script.js
+document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('nav ul li a');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+});
