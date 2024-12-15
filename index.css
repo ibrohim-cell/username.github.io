@@ -1,220 +1,258 @@
-import React, { useState } from 'react';
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portofolio Muhammad Ibrohim Nasution</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState } = React;
 
-// Custom SVG Icons (same as previous implementation)
-const HomeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-    <polyline points="9 22 9 12 15 12 15 22"/>
-  </svg>
-);
+    // Icons
+    const InstagramIcon = () => (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </svg>
+    );
 
-const UserIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-    <circle cx="12" cy="7" r="4"/>
-  </svg>
-);
+    const YouTubeIcon = () => (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path>
+        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+      </svg>
+    );
 
-const BriefcaseIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-  </svg>
-);
+    const HomeIcon = () => (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+    );
 
-const MailIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="4" width="20" height="16" rx="2"/>
-    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-  </svg>
-);
+    const UserIcon = () => (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+    );
 
-const InstagramIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-  </svg>
-);
+    const EducationIcon = () => (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+        <path d="M6 12v5c0 1.1.9 2 2 2h4v3l3-3h4c1.1 0 2-.9 2-2v-5"></path>
+      </svg>
+    );
 
-const YouTubeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 8v8l5-4z"/>
-    <rect x="2" y="6" width="20" height="12" rx="2" ry="2"/>
-  </svg>
-);
+    const ProjectIcon = () => (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="12" y1="6" x2="12" y2="18"></line>
+        <line x1="6" y1="12" x2="18" y2="12"></line>
+      </svg>
+    );
 
-const MuhammadIbrohimPortfolio = () => {
-  const [activeSection, setActiveSection] = useState('home');
+    const MuhammadIbrohimPortfolio = () => {
+      const [activeSection, setActiveSection] = useState('home');
 
-  const sections = {
-    home: (
-      <div className="flex flex-col items-center justify-center space-y-6 text-center">
-        <img 
-          src="/api/placeholder/300/300" 
-          alt="Muhammad Ibrohim Nasution" 
-          className="rounded-full w-64 h-64 object-cover border-4 border-blue-500 shadow-lg"
-        />
-        <h1 className="text-4xl font-bold text-gray-800">Muhammad Ibrohim Nasution</h1>
-        <p className="text-xl text-gray-600">Mahasiswa Matematika & Desainer</p>
-        <div className="flex space-x-4">
-          <a href="https://instagram.com" className="text-blue-500 hover:text-blue-700"><InstagramIcon /></a>
-          <a href="https://youtube.com" className="text-blue-500 hover:text-blue-700"><YouTubeIcon /></a>
-        </div>
-        <p className="text-gray-600 max-w-xl text-center">
-          Saya adalah mahasiswa yang mempunyai keahlian dalam memfoto, mengedit, dan mempublish menggunakan kamera hp, Canva, CapCut, dan Alight Motion. Selain itu, saya juga ahli dalam penelitian, seperti membuat jurnal tentang batik fractal.
-        </p>
-      </div>
-    ),
-    about: (
-      <div className="space-y-4">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">Tentang Saya</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <h3 className="text-xl font-semibold mb-2">Profil</h3>
-            <p className="text-gray-600">
-              Saya adalah mahasiswa Universitas Negeri Medan di Fakultas MIPA, jurusan Matematika. 
-              Berasal dari keluarga sederhana dengan ibu seorang petani, saya memiliki 6 saudara tiri 
-              dan 1 saudara kandung.
-            </p>
+      const sections = {
+        home: (
+          <div className="flex flex-col items-center justify-center space-y-6 text-center p-6">
+            <img 
+              src="https://placehold.co/300x300" 
+              alt="Muhammad Ibrohim Nasution" 
+              className="rounded-full w-64 h-64 object-cover border-4 border-blue-500 shadow-lg"
+            />
+            <h1 className="text-4xl font-bold text-gray-800">Muhammad Ibrohim Nasution</h1>
+            <p className="text-xl text-gray-600">Mahasiswa Matematika & Desainer Kreatif</p>
+            <div className="flex space-x-4">
+              <a 
+                href="https://www.instagram.com/mhd_ibrohim_nst/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-pink-500 hover:text-pink-700 transition-colors"
+              >
+                <InstagramIcon />
+              </a>
+              <a 
+                href="https://youtube.com/@vidiopembelajaranboim" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-red-500 hover:text-red-700 transition-colors"
+              >
+                <YouTubeIcon />
+              </a>
+            </div>
+            <div className="text-gray-700 space-y-2">
+              <p><strong>Email:</strong> 4231230002@mhs.unimed.ac.id</p>
+              <p><strong>Telepon:</strong> 085762824951</p>
+            </div>
           </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-2">Keahlian</h3>
-            <ul className="list-disc list-inside text-gray-600">
-              <li>Desain</li>
-              <li>Fotografi</li>
-              <li>Video Editing</li>
-              <li>Penelitian Matematika</li>
-              <li>Pertanian</li>
-            </ul>
-          </div>
-        </div>
-        <div className="mt-6">
-          <h3 className="text-2xl font-semibold mb-4">Visi dan Misi</h3>
-          <p className="text-gray-600 mb-4">
-            <strong>Visi:</strong> Menghasilkan inovasi akademis dan solusi praktis yang memberdayakan 
-            masyarakat melalui pendidikan dan kewirausahaan berkelanjutan.
-          </p>
-          <ul className="list-disc list-inside text-gray-600 space-y-2">
-            {[
-              "Mengintegrasikan pengajaran akademis dengan praktik kewirausahaan yang inovatif",
-              "Mendorong pengembangan kemampuan berpikir kritis dan jiwa wirausaha",
-              "Menciptakan penelitian terapan yang memiliki nilai ekonomi dan sosial",
-              "Membangun ekosistem pembelajaran yang mendukung pengembangan startup dan inovasi"
-            ].map((misi, index) => (
-              <li key={index}>{misi}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    ),
-    projects: (
-      <div className="space-y-6">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">Proyek</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          {[
-            {
-              title: "Satria Tani",
-              description: "Alat untuk mempermudah petani menanam kacang-kacangan seperti kacang hijau dan kacang tanah",
-              technologies: ["Desain Sederhana", "Terjangkau"],
-              image: "/api/placeholder/400/300"
-            },
-            {
-              title: "Batik Fractal Web",
-              description: "Aplikasi web design untuk membuat batik fraktal dengan pengaturan warna custom",
-              technologies: ["Web Design", "Coding", "VCS"],
-              image: "/api/placeholder/400/300"
-            }
-          ].map((project, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-gray-600 mb-2">{project.description}</p>
-                <div className="flex space-x-2">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span 
-                      key={techIndex} 
-                      className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+        ),
+        about: (
+          <div className="space-y-6 p-6">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">Tentang Saya</h2>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-3 text-blue-600">Profil Pribadi</h3>
+              <p className="text-gray-700 mb-4">
+                Saya adalah mahasiswa Universitas Negeri Medan di Fakultas MIPA, Jurusan Matematika. 
+                Berasal dari keluarga sederhana dengan 6 saudara tiri dan 1 saudara kandung. 
+                Ibu saya seorang petani yang mengajarkan saya nilai-nilai kerja keras dan kesederhanaan.
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-3 text-blue-600">Keahlian & Minat</h3>
+              <div className="grid md:grid-cols-2 gap-3">
+                {[
+                  "Desain Grafis", 
+                  "Penelitian Matematika", 
+                  "Fotografi", 
+                  "Video Editing", 
+                  "Pertanian", 
+                  "Web Development",
+                  "Editing (Canva, CapCut, Alight Motion)"
+                ].map((skill, index) => (
+                  <div 
+                    key={index} 
+                    className="bg-blue-50 rounded-full px-3 py-1 text-center text-blue-700 text-sm shadow-sm"
+                  >
+                    {skill}
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-    ),
-    contact: (
-      <div className="space-y-6">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">Hubungi Saya</h2>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Kontak</h3>
-              <p className="text-gray-600">
-                <strong>Email:</strong> 4231230002@mhs.unimed.ac.id
-              </p>
-              <p className="text-gray-600">
-                <strong>WhatsApp:</strong> 085762824951
-              </p>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-2xl font-semibold mb-4 text-blue-600">Visi dan Misi</h3>
+              <blockquote className="border-l-4 border-blue-500 pl-4 mb-4 italic text-gray-600">
+                "Menghasilkan inovasi akademis dan solusi praktis yang memberdayakan 
+                masyarakat melalui pendidikan dan kewirausahaan berkelanjutan"
+              </blockquote>
             </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Pendidikan</h3>
-              <ul className="list-disc list-inside text-gray-600">
-                <li>Universitas Negeri Medan - Matematika (2023)</li>
-                <li>SMA Swasta Baitul Aziz - IPA (2020-2023)</li>
-              </ul>
+          </div>
+        ),
+        education: (
+          <div className="space-y-6 p-6">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">Pendidikan</h2>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-4 text-blue-600">Riwayat Pendidikan</h3>
+              {[
+                {
+                  level: "Perguruan Tinggi",
+                  institution: "Universitas Negeri Medan",
+                  major: "FMIPA - Matematika",
+                  year: "2023 - Sekarang",
+                  gpa: "2.20"
+                },
+                {
+                  level: "Sekolah Menengah Atas",
+                  institution: "SMA Swasta Baitul Aziz",
+                  major: "IPA",
+                  year: "2020 - 2023"
+                },
+                {
+                  level: "Sekolah Menengah Pertama",
+                  institution: "SMP Swasta Baitul Aziz",
+                  year: "2017 - 2020"
+                },
+                {
+                  level: "Sekolah Dasar",
+                  institution: "AMIN Darussalam",
+                  year: "2011 - 2017"
+                }
+              ].map((edu, index) => (
+                <div key={index} className="mb-4 pb-4 border-b last:border-b-0">
+                  <h4 className="font-semibold text-gray-700">{edu.level}</h4>
+                  <p className="text-gray-600">{edu.institution}</p>
+                  {edu.major && <p className="text-gray-500">{edu.major}</p>}
+                  <p className="text-sm text-gray-500">{edu.year}</p>
+                  {edu.gpa && <p className="text-sm text-gray-500">IPK: {edu.gpa}</p>}
+                </div>
+              ))}
             </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Prestasi</h3>
-              <ul className="list-disc list-inside text-gray-600">
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-3 text-blue-600">Prestasi</h3>
+              <ul className="list-disc list-inside text-gray-700 space-y-2">
                 <li>Peraih Medali Perunggu OSN-HKu</li>
                 <li>Juara 3 Matematika Kelas 8</li>
               </ul>
             </div>
           </div>
+        ),
+        projects: (
+          <div className="space-y-6 p-6">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">Portofolio Proyek</h2>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold mb-3 text-blue-600">Satria Tani</h3>
+                <p className="text-gray-700 mb-4">
+                  Alat untuk mempermudah petani dalam menanam kacang-kacangan seperti kacang hijau 
+                  dan kacang tanah. Dirancang dengan bahan sederhana agar terjangkau oleh masyarakat.
+                </p>
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div className="bg-green-50 rounded-lg p-3 text-green-800">
+                    <strong>Peran:</strong> Pembuat Alat
+                  </div>
+                  <div className="bg-green-50 rounded-lg p-3 text-green-800">
+                    <strong>Teknologi:</strong> Bahan Sederhana
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-3 text-blue-600">Web Batik Fractal</h3>
+                <p className="text-gray-700 mb-4">
+                  Aplikasi web design untuk membuat batik fraktal dengan kemampuan mengatur warna sesuai keinginan.
+                </p>
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div className="bg-blue-50 rounded-lg p-3 text-blue-800">
+                    <strong>Peran:</strong> Pengembang Fitur Warna
+                  </div>
+                  <div className="bg-blue-50 rounded-lg p-3 text-blue-800">
+                    <strong>Teknologi:</strong> VCS (Version Control System)
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      };
+
+      return (
+        <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
+          <div className="w-full md:w-20 bg-white shadow-lg flex flex-row md:flex-col items-center py-4 md:py-8 space-x-4 md:space-x-0 md:space-y-6 justify-center">
+            {[
+              { icon: HomeIcon, section: 'home' },
+              { icon: UserIcon, section: 'about' },
+              { icon: EducationIcon, section: 'education' },
+              { icon: ProjectIcon, section: 'projects' }
+            ].map(({ icon: Icon, section }) => (
+              <button
+                key={section}
+                onClick={() => setActiveSection(section)}
+                className={`p-3 rounded-full transition-all duration-300 ${
+                  activeSection === section
+                    ? 'bg-blue-500 text-white'
+                    : 'text-gray-500 hover:bg-blue-100'
+                }`}
+              >
+                <Icon />
+              </button>
+            ))}
+          </div>
+          <div className="flex-1 overflow-y-auto">
+            {sections[activeSection]}
+          </div>
         </div>
-      </div>
-    )
-  };
+      );
+    };
 
-  return (
-    <div className="min-h-screen bg-gray-50 flex">
-      {/* Sidebar Navigation */}
-      <div className="w-20 bg-white shadow-lg flex flex-col items-center py-8 space-y-6">
-        {[
-          { icon: HomeIcon, section: 'home' },
-          { icon: UserIcon, section: 'about' },
-          { icon: BriefcaseIcon, section: 'projects' },
-          { icon: MailIcon, section: 'contact' }
-        ].map(({ icon: Icon, section }) => (
-          <button
-            key={section}
-            onClick={() => setActiveSection(section)}
-            className={`p-3 rounded-full transition-all duration-300 ${
-              activeSection === section 
-                ? 'bg-blue-500 text-white' 
-                : 'text-gray-500 hover:bg-blue-100'
-            }`}
-          >
-            <Icon />
-          </button>
-        ))}
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 p-12 overflow-y-auto">
-        {sections[activeSection]}
-      </div>
-    </div>
-  );
-};
-
-export default MuhammadIbrohimPortfolio;
+    ReactDOM.render(<MuhammadIbrohimPortfolio />, document.getElementById('root'));
+  </script>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</body>
+</html>
